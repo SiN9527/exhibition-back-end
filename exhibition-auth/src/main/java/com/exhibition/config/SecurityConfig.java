@@ -1,4 +1,11 @@
 package com.exhibition.config;
+
+import com.exhibition.repository.AdminMainRepository;
+import com.exhibition.repository.AdminMainRoleRepository;
+import com.exhibition.repository.MemberMainRepository;
+import com.exhibition.repository.MemberMainRoleRepository;
+import com.exhibition.service.JwtAdminDetailsService;
+import com.exhibition.service.JwtMemberDetailsService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +34,7 @@ public class SecurityConfig {
     /**
      * 定義 SecurityFilterChain Bean，設定安全性過濾鏈
      *
-     * @param http Spring Security 的 HttpSecurity 物件
+     * @param http                    Spring Security 的 HttpSecurity 物件
      * @param jwtAuthenticationFilter 自動注入的 JwtAuthenticationFilter Bean（透過 @Qualifier 指定）
      * @return 配置後的 SecurityFilterChain 物件
      * @throws Exception 可能拋出的例外
@@ -64,7 +71,7 @@ public class SecurityConfig {
     /**
      * 定義 JwtAuthenticationFilter Bean，並透過方法參數注入 userDetailsService 與 memberDetailsService 兩個 Bean
      *
-     * @param userDetailsService 用於 USER 認證的 UserDetailsService Bean（透過 @Qualifier 指定）
+     * @param userDetailsService   用於 USER 認證的 UserDetailsService Bean（透過 @Qualifier 指定）
      * @param memberDetailsService 用於 MEMBER 認證的 UserDetailsService Bean（透過 @Qualifier 指定）
      * @return JwtAuthenticationFilter 實例
      */
@@ -79,7 +86,7 @@ public class SecurityConfig {
     /**
      * 定義處理 USER 認證的 UserDetailsService Bean
      *
-     * @param adminMainRepository 針對 USER 資料表的 repository
+     * @param adminMainRepository     針對 USER 資料表的 repository
      * @param adminMainRoleRepository 針對 USER 角色的 repository
      * @return JwtUserDetailsService 實例
      */
@@ -92,7 +99,7 @@ public class SecurityConfig {
     /**
      * 定義處理 MEMBER 認證的 UserDetailsService Bean
      *
-     * @param memberMainRepository 針對 MEMBER 資料表的 repository
+     * @param memberMainRepository     針對 MEMBER 資料表的 repository
      * @param memberMainRoleRepository 針對 MEMBER 角色的 repository
      * @return JwtMemberDetailsService 實例
      */

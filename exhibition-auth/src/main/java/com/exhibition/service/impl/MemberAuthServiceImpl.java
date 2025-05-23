@@ -1,23 +1,25 @@
 package com.exhibition.service.impl;
 
-import com.svc.ems.config.jwt.JwtAdminDetailsService;
-import com.svc.ems.config.jwt.JwtMemberDetailsService;
-import com.svc.ems.config.jwt.JwtUtil;
-import com.svc.ems.dto.auth.*;
-import com.svc.ems.dto.base.ApiResponseTemplate;
-import com.svc.ems.entity.MemberMainEntity;
-import com.svc.ems.entity.MemberMainRoleEntity;
-import com.svc.ems.entity.MemberMainRolePkEntity;
-import com.svc.ems.enums.ErrorCode;
-import com.svc.ems.exception.ServiceException;
-import com.svc.ems.repo.AdminMainRepository;
-import com.svc.ems.repo.MemberMainRepository;
-import com.svc.ems.repo.MemberMainRoleRepository;
-import com.svc.ems.svc.auth.MemberAuthService;
-import com.svc.ems.svc.mail.EmailService;
-import com.svc.ems.utils.MapperUtils;
+import com.exhibition.config.JwtUtil;
+import com.exhibition.dto.ApiResponseTemplate;
+import com.exhibition.dto.auth.AdminLoginRequest;
+import com.exhibition.dto.auth.MemberRegisterRequest;
+import com.exhibition.dto.user.*;
+import com.exhibition.endpointService.NotificationService;
+import com.exhibition.entity.MemberMainEntity;
+import com.exhibition.entity.MemberMainRoleEntity;
+import com.exhibition.entity.MemberMainRolePkEntity;
+import com.exhibition.enums.ErrorCode;
+import com.exhibition.repository.AdminMainRepository;
+import com.exhibition.repository.MemberMainRepository;
+import com.exhibition.repository.MemberMainRoleRepository;
+import com.exhibition.service.JwtAdminDetailsService;
+import com.exhibition.service.JwtMemberDetailsService;
+import com.exhibition.service.MemberAuthService;
+import com.exhibition.utils.MapperUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +42,7 @@ import java.util.UUID;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class MemberAuthServiceImpl implements MemberAuthService {
 
     private final MemberMainRepository memberMainRepository;
@@ -52,27 +55,12 @@ public class MemberAuthServiceImpl implements MemberAuthService {
 
 
 
-    private final EmailService emailService;
+    private final NotificationService notificationService;
     private final AdminMainRepository userRepository;
 
     private final MemberMainRoleRepository memberMainRoleRepository;
     private final MapperUtils mapperUtils;
 
-    public MemberAuthServiceImpl(MemberMainRepository memberMainRepository, JwtUtil jwtUtil,
-                                 JwtAdminDetailsService userDetailsService,
-                                 JwtMemberDetailsService memberDetailsService,
-                                 PasswordEncoder passwordEncoder,
-                                 EmailService emailService, AdminMainRepository userRepository, MemberMainRoleRepository memberMainRoleRepository, MapperUtils mapperUtils) {
-        this.memberMainRepository = memberMainRepository;
-        this.jwtUtil = jwtUtil;
-        this.userDetailsService = userDetailsService;
-        this.memberDetailsService = memberDetailsService;
-        this.passwordEncoder = passwordEncoder;
-        this.emailService = emailService;
-        this.userRepository = userRepository;
-        this.memberMainRoleRepository = memberMainRoleRepository;
-        this.mapperUtils = mapperUtils;
-    }
 
 
     /**
@@ -123,7 +111,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         memberMainRole.setCreatedBy("SYS"); // 系統自動輸入
         memberMainRoleRepository.save(memberMainRole);
 
-        emailService.sendVerificationEmail(entity.getEmail());
+        notificationService.sendVerificationEmail(entity.getEmail());
         // 使用 ApiResponse.success() 包裝成功訊息，再回傳 ResponseEntity
         return ResponseEntity.ok(ApiResponseTemplate.success("User registered successfully ! Please check your email to verify your account."));
     }
@@ -195,7 +183,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         member.setNeedResetPwd(true);
         memberMainRepository.save(member);
 
-        emailService.sendTempPasswordEmail(member, tempPassword);
+        notificationService.sendTempPasswordEmail(member, tempPassword);
         return ResponseEntity.ok(ApiResponseTemplate.success("Temporary password sent to your email."));
     }
 
@@ -257,7 +245,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         clearCookies(response);
 
         //發送 Email 通知使用者密碼已更新
-        emailService.sendPasswordChangedNotification(member);
+        notificationService.sendPasswordChangedNotification(member);
 
         return ResponseEntity.ok(ApiResponseTemplate.success("Password updated successfully, please login again"));
     }
@@ -282,7 +270,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         memberMainRepository.save(member);
 
         //發送驗證信
-        emailService.sendVerificationEmail(newEmail);
+        notificationService.sendMailVeri ficationEmail(newEmail);
 
         return ResponseEntity.ok(ApiResponseTemplate.success("Email updated. Please check your new email to verify your account."));
     }
@@ -380,7 +368,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
     }
 
     @Override
-    public ResponseEntity<ApiResponseTemplate<?>> memberUpdateProfile(MemberUpdateRequest req, UserDetails userDetails,HttpServletResponse response) {
+    public ResponseEntity<ApiResponseTemplate<?>> memberUpdateProfile(MemberUpdateRequest req, UserDetails userDetails, HttpServletResponse response) {
         Optional<MemberMainEntity> member = jwtUtil.validateAndGetEntity(userDetails, memberMainRepository);
         if (member.isEmpty()) {
             return ResponseEntity.badRequest().body(ApiResponseTemplate.fail(400, ErrorCode.MEMBER_NOT_FOUND));

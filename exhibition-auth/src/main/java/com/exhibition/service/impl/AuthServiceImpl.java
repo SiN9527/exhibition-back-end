@@ -6,7 +6,6 @@ import com.exhibition.endpointService.UserService;
 import com.exhibition.exception.*;
 import com.exhibition.mapper.UserAccountMapper;
 import com.exhibition.utils.CodeGeneratorUtils;
-import com.exhibition.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;

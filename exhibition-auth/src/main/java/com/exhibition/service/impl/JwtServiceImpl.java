@@ -1,6 +1,5 @@
 package com.exhibition.service.impl;
 
-import com.exhibition.utils.JwtUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;

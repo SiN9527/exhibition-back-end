@@ -2,8 +2,9 @@ package com.exhibition.serviceAdapter;
 
 
 import com.exhibition.config.Client;
+import com.exhibition.dto.auth.MemberMainEntityDto;
+import com.exhibition.dto.mail.SendMailRequest;
 import com.exhibition.endpointService.NotificationService;
-import com.exhibition.wrapper.MatchNotificationWrapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 
     @Override
-    public void sendTempPasswordEmail(UserAccountDto userAccountDto, String tempPassword,String token,String purpose) {
+    public void sendTempPasswordEmail(MemberMainEntityDto dto, String tempPassword, String token, String purpose) {
         SendMailRequest sendMailRequest = new SendMailRequest();
-        sendMailRequest.setUserAccountDto(userAccountDto);
+        sendMailRequest.setMemberMainEntityDto(dto);
         sendMailRequest.setTempPassword(tempPassword);
         sendMailRequest.setToken(token);
         sendMailRequest.setPurpose(purpose);
@@ -33,9 +34,9 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void sendResetPwdSuccessEmail(UserAccountDto userAccountDto,String token,String purpose) {
+    public void sendResetPwdSuccessEmail(MemberMainEntityDto dto,String token,String purpose) {
         SendMailRequest sendMailRequest = new SendMailRequest();
-        sendMailRequest.setUserAccountDto(userAccountDto);
+        sendMailRequest.setMemberMainEntityDto(dto);
         sendMailRequest.setToken(token);
         sendMailRequest.setPurpose(purpose);
 
@@ -52,21 +53,13 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void sendRegistrationVerifyMail(UserAccountDto userAccountDto,String token,String purpose) {
+    public void sendRegistrationVerifyMail(MemberMainEntityDto dto, String token, String purpose) {
         SendMailRequest sendMailRequest = new SendMailRequest();
-        sendMailRequest.setUserAccountDto(userAccountDto);
+        sendMailRequest.setMemberMainEntityDto(dto);
         sendMailRequest.setToken(token);
         sendMailRequest.setPurpose(purpose);
 
         postSendMailClient.post(sendMailRequest, "/endpoint/notification/sendMail");
     }
-    @Override
-    public void sendMatchConfirmedMail(MatchNotificationWrapper wrapper) {
-        throw new NotSupportedServiceException("auth service 不支援 send match confirm mail");
-    }
 
-    @Override
-    public void sendMatchGannaStartMail(MatchNotificationWrapper wrapper) {
-        throw new NotSupportedServiceException("auth service 不支援 send match match ganna start mail");
-    }
 }

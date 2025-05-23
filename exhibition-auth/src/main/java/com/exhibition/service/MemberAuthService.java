@@ -1,7 +1,9 @@
 package com.exhibition.service;
 
-import com.svc.ems.dto.auth.*;
-import com.svc.ems.dto.base.ApiResponseTemplate;
+import com.exhibition.dto.ApiResponseTemplate;
+import com.exhibition.dto.auth.AdminLoginRequest;
+import com.exhibition.dto.auth.MemberRegisterRequest;
+import com.exhibition.dto.user.*;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,9 +37,9 @@ public interface MemberAuthService {
     public ResponseEntity<ApiResponseTemplate<?>> memberRefreshToken(String refreshToken, HttpServletResponse response);
 
     // 更新個人資料
-    public ResponseEntity<ApiResponseTemplate<?>> memberUpdateProfile(MemberUpdateRequest req, UserDetails userDetails,HttpServletResponse response);
+    public ResponseEntity<ApiResponseTemplate<?>> memberUpdateProfile(MemberUpdateRequest req, UserDetails userDetails, HttpServletResponse response);
 
-    public ResponseEntity<ApiResponseTemplate<?>> memberUpdatePwd(MemberPwdUpdateRequest req, UserDetails userDetails,HttpServletResponse response);
+    public ResponseEntity<ApiResponseTemplate<?>> memberUpdatePwd(MemberPwdUpdateRequest req, UserDetails userDetails, HttpServletResponse response);
 
     // **忘記密碼 API**
     ResponseEntity<ApiResponseTemplate<?>> memberForgotPwd(MemberPwdUpdateRequest req);
