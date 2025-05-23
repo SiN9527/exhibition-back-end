@@ -1,0 +1,16 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "9090:8080"        # Jenkins Web UI
+      - "50000:50000"      # 給 Agent 用
+    volumes:
+      - jenkins_home:/var/jenkins_home     # 資料持久化
+      - /var/run/docker.sock:/var/run/docker.sock  # 給 Jenkins 權限操控 Docker
+    restart: always
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"  # 可選擇略過初始化精靈
+
+volumes:
+  jenkins_home:
