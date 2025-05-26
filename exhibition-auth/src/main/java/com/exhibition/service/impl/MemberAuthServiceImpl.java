@@ -1,14 +1,13 @@
 package com.exhibition.service.impl;
 
-import com.exhibition.config.JwtUtil;
 import com.exhibition.dto.ApiResponseTemplate;
 import com.exhibition.dto.auth.AdminLoginRequest;
 import com.exhibition.dto.auth.MemberRegisterRequest;
 import com.exhibition.dto.user.*;
 import com.exhibition.endpointService.NotificationService;
-import com.exhibition.entity.MemberMainEntity;
-import com.exhibition.entity.MemberMainRoleEntity;
-import com.exhibition.entity.MemberMainRolePkEntity;
+import com.exhibition.entity.member.MemberMainEntity;
+import com.exhibition.entity.member.MemberMainRoleEntity;
+import com.exhibition.entity.member.MemberMainRolePkEntity;
 import com.exhibition.enums.ErrorCode;
 import com.exhibition.repository.AdminMainRepository;
 import com.exhibition.repository.MemberMainRepository;
@@ -16,6 +15,7 @@ import com.exhibition.repository.MemberMainRoleRepository;
 import com.exhibition.service.JwtAdminDetailsService;
 import com.exhibition.service.JwtMemberDetailsService;
 import com.exhibition.service.MemberAuthService;
+import com.exhibition.utils.JwtUtil;
 import com.exhibition.utils.MapperUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -111,7 +111,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         memberMainRole.setCreatedBy("SYS"); // 系統自動輸入
         memberMainRoleRepository.save(memberMainRole);
 
-        notificationService.sendVerificationEmail(entity.getEmail());
+        notificationService.sendMailVerificationEmail(entity.getEmail());
         // 使用 ApiResponse.success() 包裝成功訊息，再回傳 ResponseEntity
         return ResponseEntity.ok(ApiResponseTemplate.success("User registered successfully ! Please check your email to verify your account."));
     }

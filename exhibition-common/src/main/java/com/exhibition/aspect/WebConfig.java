@@ -4,15 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * ClassName: com.sweetolive.exhibition_backend.config.WebConfig
- * Package: com.sweetolive.exhibition_backend.config
- * Description:
- *
- * @Author 郭庭安
- * @Create 2025/1/24 上午9:30
- * @Version 1.0
- */
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Override

@@ -1,10 +1,11 @@
 package com.exhibition.service;
 
+import com.exhibition.entity.admin.AdminMainEntity;
+import com.exhibition.entity.admin.AdminRoleEntity;
+import com.exhibition.entity.admin.JwtAdminDetails;
+import com.exhibition.exception.AuthenticationFailedException;
 import com.exhibition.repository.AdminMainRepository;
 import com.exhibition.repository.AdminMainRoleRepository;
-import com.svc.ems.dto.base.JwtAdminDetails;
-import com.svc.ems.entity.AdminMainEntity;
-import com.svc.ems.entity.AdminRoleEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,9 +35,9 @@ public class JwtAdminDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
         // 查詢使用者
         AdminMainEntity admin = adminMainRepository.findByAccount(account)
-                .orElseThrow(() -> new UsernameNotFoundException("Not found with account: " + account));
+                .orElseThrow(() -> new AuthenticationFailedException("Not found with account: " + account));
         if (!admin.getEnabled()) {
-            throw new UsernameNotFoundException("Account is disabled");
+            throw new AuthenticationFailedException("Account is disabled");
         }
 
         // 透過關聯表查詢該使用者的角色
@@ -54,8 +55,8 @@ public class JwtAdminDetailsService implements UserDetailsService {
    public boolean  adminExistsByEmail(String email) {
         return adminMainRepository.existsByEmail(email);
     }
-    public boolean  adminExistsByAccount(String account) {
-        return adminMainRepository.existsByAccount(account);
+    public boolean  adminExistsByUserName(String userName) {
+        return adminMainRepository.existsByUserName(userName);
     }
 }
 

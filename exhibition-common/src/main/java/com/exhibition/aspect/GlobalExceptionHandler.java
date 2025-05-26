@@ -1,5 +1,11 @@
 package com.exhibition.aspect;
 
+
+import com.exhibition.exception.ServiceException;
+import com.exhibition.exception.ServiceRecoverableException;
+import com.exhibition.exception.ServiceUnRecoverableException;
+import com.exhibition.exception.payload.ControllerProcessPayload;
+import com.exhibition.exception.payload.ProcessPayload;
 import com.exhibition.monitor.event.UnknowThrowableAlertEvent;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -75,4 +81,5 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage(), ex);
         return ResponseEntity.badRequest().body(ControllerProcessPayload.softError("系統錯誤"));
     }
+
 }

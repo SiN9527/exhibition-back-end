@@ -1,14 +1,16 @@
 package com.exhibition.service;
 
-import com.svc.ems.dto.auth.AdminLoginRequest;
-import com.svc.ems.dto.auth.LoginRequest;
-import com.svc.ems.dto.base.ApiResponseTemplate;
+
+import com.exhibition.dto.ApiResponseTemplate;
+import com.exhibition.dto.auth.AdminLoginRequest;
+import com.exhibition.dto.auth.LoginRequest;
+import com.exhibition.dto.auth.MemberLoginRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface JwtAuthLoginService {
 
-    public ResponseEntity<ApiResponseTemplate<String>> memberAuthLogin(LoginRequest req, HttpServletResponse response);
+    String  memberAuthLogin(MemberLoginRequest req, HttpServletResponse response);
 
     public ResponseEntity<ApiResponseTemplate<String>> adminAuthLogin(AdminLoginRequest req, HttpServletResponse response);
 

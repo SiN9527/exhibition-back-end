@@ -1,43 +1,48 @@
 package com.exhibition.exception;
 
-import com.svc.ems.enums.ErrorCode;
 
-/**
- * 服務異常
- */
-public class ServiceException extends RuntimeException{
+import com.exhibition.enumerate.ServiceExceptionReason;
+import lombok.Data;
 
-    private final ErrorCode errorCode;
+import java.time.Instant;
 
-    public ServiceException(ErrorCode errorCode) {
-        super(errorCode.getMessage());
-        this.errorCode = errorCode;
+@Data
+public class ServiceException extends RuntimeException {
+
+    // 系統執行function 後才會發生的例外，排除參數本身驗證沒過、API 已廢棄
+    private Instant timestamp;
+    private String briefMessage;
+    private String reason; // optional
+    private ServiceExceptionReason exceptionReason;
+
+    public ServiceException(String breifMessage, ServiceExceptionReason exceptionReason) {
+        this.briefMessage = breifMessage;
+        this.timestamp = Instant.now();
+        this.exceptionReason = exceptionReason;
     }
 
-    public ServiceException(ErrorCode errorCode, String customMessage) {
-        super(customMessage);
-        this.errorCode = errorCode;
-    }
-
-
-
-    public ServiceException(String message, ErrorCode errorCode) {
-        super(message);
-        this.errorCode = errorCode;
-    }
-
-    public ServiceException(String message, Throwable cause, ErrorCode errorCode) {
-        super(message, cause);
-        this.errorCode = errorCode;
-    }
-
-    public ServiceException(Throwable cause, ErrorCode errorCode) {
+    public ServiceException(String breifMessage, ServiceExceptionReason exceptionReason, Throwable cause) {
         super(cause);
-        this.errorCode = errorCode;
+        this.briefMessage = breifMessage;
+        this.timestamp = Instant.now();
+        this.exceptionReason = exceptionReason;
     }
 
-    protected ServiceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, ErrorCode errorCode) {
-        super(message, cause, enableSuppression, writableStackTrace);
-        this.errorCode = errorCode;
+    public ServiceException(String breifMessage, ServiceExceptionReason exceptionReason, String detailMessage, String reasonDesc) {
+        super(detailMessage);
+        this.briefMessage = breifMessage;
+        this.timestamp = Instant.now();
+        this.exceptionReason = exceptionReason;
+        this.reason = reasonDesc;
     }
+
+    public ServiceException(String breifMessage, ServiceExceptionReason exceptionReason, String detailMessage, String reasonDesc, Throwable cause) {
+        super(detailMessage, cause);
+        this.briefMessage = breifMessage;
+        this.timestamp = Instant.now();
+        this.exceptionReason = exceptionReason;
+        this.reason = reasonDesc;
+    }
+
+
 }

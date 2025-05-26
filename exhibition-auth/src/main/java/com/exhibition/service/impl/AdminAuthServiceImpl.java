@@ -1,15 +1,14 @@
 package com.exhibition.service.impl;
 
-import com.exhibition.config.JwtUtil;
 import com.exhibition.dto.ApiResponseTemplate;
 import com.exhibition.dto.auth.AdminRegisterRequest;
 import com.exhibition.dto.user.AdminMemberDeleteRequest;
 import com.exhibition.dto.user.AdminMemberListRequest;
 import com.exhibition.dto.user.AdminMemberProfileResponse;
 import com.exhibition.dto.user.AdminMemberUpdateRequest;
-import com.exhibition.entity.AdminEventEntity;
-import com.exhibition.entity.AdminMainEntity;
-import com.exhibition.entity.MemberMainEntity;
+import com.exhibition.entity.admin.AdminEventEntity;
+import com.exhibition.entity.admin.AdminMainEntity;
+import com.exhibition.entity.member.MemberMainEntity;
 import com.exhibition.enums.ErrorCode;
 import com.exhibition.repository.*;
 import com.exhibition.service.AdminAuthService;

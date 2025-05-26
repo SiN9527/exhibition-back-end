@@ -18,7 +18,7 @@ public class Client<T, R> {
     private final HttpHeaders headers;
     private final Class<R> returnClass;
     private final Logger log = LoggerFactory.getLogger(Client.class);
-    private final RetryTemplate retryTemplate;
+    private final  RetryTemplate retryTemplate;
 
     public Client(RestTemplate restTemplate, Class<R> clazz, RetryTemplate retryTemplate) {
         this.restTemplate = restTemplate;

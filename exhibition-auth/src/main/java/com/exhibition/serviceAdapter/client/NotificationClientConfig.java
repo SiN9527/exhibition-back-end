@@ -2,6 +2,7 @@ package com.exhibition.serviceAdapter.client;
 
 import com.exhibition.config.Client;
 import com.exhibition.dto.auth.*;
+import com.exhibition.dto.mail.SendMailRequest;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

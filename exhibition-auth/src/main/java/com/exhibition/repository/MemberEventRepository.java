@@ -1,8 +1,8 @@
 package com.exhibition.repository;
 
 
-import com.exhibition.entity.MemberEventEntity;
-import com.exhibition.entity.MemberEventPkEntity;
+import com.exhibition.entity.member.MemberEventEntity;
+import com.exhibition.entity.member.MemberEventPkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

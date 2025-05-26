@@ -1,6 +1,8 @@
 package com.exhibition.repository;
 
-import com.svc.ems.entity.*;
+
+import com.exhibition.entity.admin.AdminEventEntity;
+import com.exhibition.entity.admin.AdminEventPkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

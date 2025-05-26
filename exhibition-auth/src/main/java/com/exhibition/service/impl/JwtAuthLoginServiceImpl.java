@@ -1,13 +1,18 @@
 package com.exhibition.service.impl;
-import com.exhibition.config.JwtUtil;
 import com.exhibition.dto.ApiResponseTemplate;
 import com.exhibition.dto.auth.AdminLoginRequest;
 import com.exhibition.dto.auth.AdminLoginResponse;
-import com.exhibition.dto.auth.LoginRequest;
-import com.exhibition.entity.AdminMainEntity;
-import com.exhibition.entity.MemberMainEntity;
+import com.exhibition.dto.auth.MemberLoginRequest;
+import com.exhibition.entity.admin.AdminMainEntity;
+import com.exhibition.entity.member.MemberMainEntity;
 import com.exhibition.enums.ErrorCode;
+import com.exhibition.exception.AuthenticationFailedException;
+import com.exhibition.repository.AdminMainRepository;
+import com.exhibition.repository.MemberMainRepository;
+import com.exhibition.service.JwtAdminDetailsService;
 import com.exhibition.service.JwtAuthLoginService;
+import com.exhibition.service.JwtMemberDetailsService;
+import com.exhibition.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +33,8 @@ public class JwtAuthLoginServiceImpl implements JwtAuthLoginService {
     // 使用 LoggerFactory 建立 Logger 實例，傳入當前類別作為參數
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthLoginServiceImpl.class);
     private final JwtUtil jwtUtil;
-    private final  JwtAdminDetailsService adminDetailsService;
-    private final   JwtMemberDetailsService memberDetailsService;
+    private final JwtAdminDetailsService adminDetailsService;
+    private final JwtMemberDetailsService memberDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final AdminMainRepository adminMainRepository;
     private final MemberMainRepository memberRepository;
@@ -48,7 +53,7 @@ public class JwtAuthLoginServiceImpl implements JwtAuthLoginService {
     }
 
     @Override
-    public  ResponseEntity<ApiResponseTemplate<String>> memberAuthLogin(LoginRequest loginRequest, HttpServletResponse response) {
+    public  String memberAuthLogin(MemberLoginRequest loginRequest, HttpServletResponse response) {
 
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
@@ -59,12 +64,12 @@ public class JwtAuthLoginServiceImpl implements JwtAuthLoginService {
         boolean isMember = memberDetailsService.memberExists(email);
 
         if ( !isMember) {
-            return ResponseEntity.ok(ApiResponseTemplate.fail(400, ErrorCode.INVALID_EMAIL_OR_PASSWORD));
+            throw new AuthenticationFailedException("Member not found");
         }
         UserDetails userDetails;
         String type;
         String storedEncryptedPassword;
-        try {
+
 
                 MemberMainEntity member = memberRepository.findByEmail(email).orElseThrow();
                 userDetails = memberDetailsService.loadUserByUsername(email);
@@ -76,15 +81,7 @@ public class JwtAuthLoginServiceImpl implements JwtAuthLoginService {
                 ResponseEntity.ok(ApiResponseTemplate.fail(400,ErrorCode.INVALID_EMAIL_OR_PASSWORD));};
             // 取得登入 IP 與 User-Agent
 
-        } catch (Exception e) {
-            if (e.getMessage().equals("Not found with email")) {
-              return ResponseEntity.ok(ApiResponseTemplate.fail(400,  ErrorCode.INVALID_EMAIL_OR_PASSWORD));
-            } else if (e.getMessage().equals("Account is disabled")) {
-                return ResponseEntity.ok(ApiResponseTemplate.fail(400, ErrorCode.ACCOUNT_IS_DISABLED));
-            } else {
-                return ResponseEntity.ok(ApiResponseTemplate.fail(400, ErrorCode.SOMETHING_GOING_WRONG));
-            }
-        }
+        
 
         // 生成 JWT
 

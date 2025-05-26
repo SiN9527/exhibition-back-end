@@ -1,5 +1,6 @@
 package com.exhibition.controller;
 
+import com.exhibition.dto.ApiResponseTemplate;
 import com.exhibition.dto.user.MemberProfileResponse;
 import com.exhibition.dto.user.MemberPwdUpdateRequest;
 import com.exhibition.dto.user.MemberResetPwdRequest;
@@ -7,6 +8,7 @@ import com.exhibition.dto.user.MemberUpdateRequest;
 import com.exhibition.service.MemberAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
 package com.exhibition.repository;
 
-import com.exhibition.entity.AdminMainEntity;
+import com.exhibition.entity.admin.AdminMainEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

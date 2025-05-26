@@ -1,8 +1,9 @@
 package com.exhibition.repository;
 
-import com.svc.ems.entity.MemberMainRoleEntity;
-import com.svc.ems.entity.MemberMainRolePkEntity;
-import com.svc.ems.entity.MemberRoleEntity;
+
+import com.exhibition.entity.member.MemberMainRoleEntity;
+import com.exhibition.entity.member.MemberMainRolePkEntity;
+import com.exhibition.entity.member.MemberRoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

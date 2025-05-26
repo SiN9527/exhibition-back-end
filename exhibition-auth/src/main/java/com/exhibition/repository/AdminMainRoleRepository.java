@@ -1,8 +1,9 @@
 package com.exhibition.repository;
 
-import com.svc.ems.entity.AdminMainRoleEntity;
-import com.svc.ems.entity.AdminMainRolePkEntity;
-import com.svc.ems.entity.AdminRoleEntity;
+
+import com.exhibition.entity.admin.AdminMainRoleEntity;
+import com.exhibition.entity.admin.AdminMainRolePkEntity;
+import com.exhibition.entity.admin.AdminRoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

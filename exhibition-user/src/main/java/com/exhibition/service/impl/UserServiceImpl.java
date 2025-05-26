@@ -1,17 +1,6 @@
 package com.exhibition.service.impl;
 
-import com.hititoff.dto.auth.CustomUserDetail;
-import com.hititoff.dto.user.*;
-import com.hititoff.entity.UserProfile;
-import com.hititoff.entity.UserSportProfile;
-import com.hititoff.exception.FailedAndForgetException;
-import com.hititoff.exception.payload.ProcessPayload;
-import com.hititoff.mapper.UserProfileMapper;
-import com.hititoff.mapper.UserSportProfileMapper;
-import com.hititoff.repository.UserProfileRepository;
-import com.hititoff.repository.UserSportProfileRepository;
-import com.hititoff.service.UserService;
-import com.hititoff.utils.MapperUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

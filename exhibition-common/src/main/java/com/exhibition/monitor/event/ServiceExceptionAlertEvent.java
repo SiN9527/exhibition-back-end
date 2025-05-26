@@ -1,6 +1,8 @@
 package com.exhibition.monitor.event;
 
+
 import com.exhibition.enumerate.ServiceExceptionReason;
+import com.exhibition.exception.ServiceException;
 import lombok.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;

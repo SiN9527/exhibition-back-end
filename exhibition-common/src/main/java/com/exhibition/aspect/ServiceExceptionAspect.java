@@ -1,5 +1,7 @@
 package com.exhibition.aspect;
 
+import com.exhibition.exception.ServiceRecoverableException;
+import com.exhibition.exception.ServiceUnRecoverableException;
 import com.exhibition.monitor.event.ServiceExceptionAlertEvent;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

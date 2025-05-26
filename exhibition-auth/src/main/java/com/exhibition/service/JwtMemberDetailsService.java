@@ -1,15 +1,16 @@
 package com.exhibition.service;
 
+
+import com.exhibition.entity.member.JwtMemberDetails;
+import com.exhibition.entity.member.MemberMainEntity;
+import com.exhibition.entity.member.MemberRoleEntity;
+import com.exhibition.exception.AuthenticationFailedException;
 import com.exhibition.repository.MemberMainRepository;
 import com.exhibition.repository.MemberMainRoleRepository;
-import com.svc.ems.dto.base.JwtMemberDetails;
-import com.svc.ems.entity.MemberMainEntity;
-import com.svc.ems.entity.MemberRoleEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,13 +30,13 @@ public class JwtMemberDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
         // 查詢會員
         MemberMainEntity member = memberMainRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Not found with email"));
+                .orElseThrow(() -> new AuthenticationFailedException("Not found with email"));
 
         if (!member.getEnabled()) {
-            throw new UsernameNotFoundException("Account is disabled");
+            throw new AuthenticationFailedException("Account is disabled");
         }
 
         // 透過關聯表查詢該會員的角色

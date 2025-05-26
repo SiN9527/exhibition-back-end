@@ -1,7 +1,12 @@
 package com.exhibition.service;
 
-import com.svc.ems.dto.auth.*;
-import com.svc.ems.dto.base.ApiResponseTemplate;
+
+import com.exhibition.dto.ApiResponseTemplate;
+import com.exhibition.dto.auth.AdminRegisterRequest;
+import com.exhibition.dto.user.AdminMemberDeleteRequest;
+import com.exhibition.dto.user.AdminMemberListRequest;
+import com.exhibition.dto.user.AdminMemberProfileResponse;
+import com.exhibition.dto.user.AdminMemberUpdateRequest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

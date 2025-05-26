@@ -13,10 +13,5 @@ public interface NotificationService {
 
     void sendMailVerificationEmail(String newEmail, String token, String purpose);
 
-
-    void sendMatchConfirmedMail(MatchNotificationWrapper wrapper);
-
-    void sendMatchGannaStartMail(MatchNotificationWrapper wrapper);
-
     void sendRegistrationVerifyMail(MemberMainEntityDto dto, String token, String purpose);
 }

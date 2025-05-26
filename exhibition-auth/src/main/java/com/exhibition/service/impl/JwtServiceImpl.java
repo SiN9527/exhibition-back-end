@@ -1,5 +1,7 @@
 package com.exhibition.service.impl;
 
+import com.exhibition.service.JwtService;
+import com.exhibition.utils.JwtUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -37,11 +39,11 @@ public class JwtServiceImpl implements JwtService {
 
 
     @Override
-    public String generateAccessToken(String email, String userId, String userName, List<String> roles) {
+    public String generateAccessToken(String email, String userId, String type, List<String> roles) {
         return Jwts.builder()
                 .setSubject(email)
                 .claim("userId", userId)
-                .claim("userName", userName)
+                .claim("type", type)
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration))
@@ -66,10 +68,10 @@ public class JwtServiceImpl implements JwtService {
      * 產生驗證用 Token（預設 24 小時）
      */
     @Override
-    public String generateVerificationToken(String userId ,String email,String purpose) {
+    public String generateVerificationToken(String id ,String email,String purpose) {
         return Jwts.builder()
                 .setSubject(email)
-                .claim("userId", userId)
+                .claim("id", id)
                 .claim("purpose", purpose)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))

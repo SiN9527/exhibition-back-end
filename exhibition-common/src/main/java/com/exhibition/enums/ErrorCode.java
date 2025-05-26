@@ -20,6 +20,8 @@ public enum ErrorCode {
     SOMETHING_GOING_WRONG("C02", "Something going wrong.", 400),
     INVALID_REQUEST("C03", "Invalid request.", 400),
     CUSTOM_ERROR("C04", "Custom error.", 400),
+    PREVENT("C5", "Logic prohibited.", 400),
+    TRY_LATER("C06", "failed and forgot .", 400),
 
     //  **驗證類錯誤 (E01)**
 
@@ -39,7 +41,7 @@ public enum ErrorCode {
     INVALID_EMAIL_OR_PASSWORD("E14", "Invalid email or password.", 400),
     ACCOUNT_IS_DISABLED("E15", "Account is disabled.", 400),
     REGISTRATION_ALREADY_EXISTS("E16", "registration already exist.", 400),
-
+    ARG_INVALID("E17", "Argument validate failed.", 400),
 
 
 
@@ -48,8 +50,8 @@ public enum ErrorCode {
     TOKEN_EXPIRED("A02", "Token has expired, please log in again.", 401),
     TOKEN_INVALID("A03", "Invalid authentication token.", 401),
     INVALID_FRESH_TOKEN("A04", "Invalid refresh token.", 401),
-
     FORBIDDEN("A05", "You do not have permission to access this resource.", 403),
+    AUTHENTICATE_FAIL("A06", "authenticate fail.", 401),
 
     //  **系統錯誤 (S01)**
     INTERNAL_SERVER_ERROR("S01", "Internal server error.", 500),

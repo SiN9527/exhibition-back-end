@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.exhibition.endpointService.NotificationService;
 import com.exhibition.endpointService.UserService;
 import com.exhibition.exception.*;
-import com.exhibition.mapper.UserAccountMapper;
+import com.exhibition.mapper.MemberMainMapper;
 import com.exhibition.utils.CodeGeneratorUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -41,8 +41,8 @@ public class AuthServiceImpl implements AuthService {
     private final UserAccountRepository userAccountRepository;
     private final UserRoleRepository userRoleRepository;
 
-    @Qualifier("userAccountMapper")
-    private final UserAccountMapper mapper;
+    @Qualifier("memberMainMapper")
+    private final MemberMainMapper mapper;
 
     private final CodeGeneratorUtils codeGeneratorUtils;
     private final UserService userService;

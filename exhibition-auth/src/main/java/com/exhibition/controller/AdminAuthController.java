@@ -1,7 +1,8 @@
 package com.exhibition.controller;
 
-import com.svc.ems.svc.auth.AdminAuthService;
-import com.svc.ems.svc.auth.JwtAuthLoginService;
+
+import com.exhibition.service.AdminAuthService;
+import com.exhibition.service.JwtAuthLoginService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

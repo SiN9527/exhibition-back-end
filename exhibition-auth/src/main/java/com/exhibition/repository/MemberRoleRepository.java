@@ -1,6 +1,7 @@
 package com.exhibition.repository;
 
-import com.svc.ems.entity.MemberRoleEntity;
+
+import com.exhibition.entity.member.MemberRoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
