@@ -1,7 +1,7 @@
 package com.exhibition.service.base;
 
 
-import com.svc.ems.dto.common.CommonCodeList;
+import com.exhibition.dto.common.CommonCodeList;
 
 import java.util.List;
 import java.util.Map;

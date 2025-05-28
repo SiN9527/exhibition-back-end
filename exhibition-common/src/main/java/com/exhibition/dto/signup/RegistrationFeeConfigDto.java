@@ -9,9 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- * DTO for {@link com.svc.ems.entity.RegistrationFeeConfigEntity}
- */
+
 @Value
 public class RegistrationFeeConfigDto implements Serializable {
 

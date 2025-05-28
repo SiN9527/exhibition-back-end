@@ -1,6 +1,10 @@
 package com.exhibition.dto.auth;
 
+import com.exhibition.dto.user.MemberUpdateRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -8,13 +12,17 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberMainEntityDto implements Serializable {
 
     @JsonProperty("MemberId")
     String memberId;
     @JsonProperty("Email")
     String email;
+    @JsonProperty("EmailTemp")
+    String emailTemp;
     @JsonProperty("EventId")
     String eventId;
     @JsonProperty("Password")
@@ -49,10 +57,12 @@ public class MemberMainEntityDto implements Serializable {
     @JsonProperty("NeedResetPwd")
     Boolean needResetPwd;
 
-
     String createdBy;
     Timestamp createdAt;
 
     String updatedBy;
     Timestamp updatedAt;
+
+
+
 }

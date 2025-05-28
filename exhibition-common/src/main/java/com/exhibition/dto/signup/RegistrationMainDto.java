@@ -1,15 +1,12 @@
 package com.exhibition.dto.signup;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.svc.ems.entity.RegistrationMainEntity;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * DTO for {@link RegistrationMainEntity}
- */
 @Data
 public class RegistrationMainDto implements Serializable {
 

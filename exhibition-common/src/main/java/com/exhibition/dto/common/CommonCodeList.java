@@ -1,19 +1,11 @@
 package com.exhibition.dto.common;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * ClassName: CommonCodeList
- * Package: com.timmy.bankProject.dto.composite.commoncode
- * Description:
- *
- * @Author 郭庭安
- * @Create 2024/7/27 10:38 PM
- * @Version 1.0
- */
 @Data
 public class CommonCodeList implements Serializable {
     private static final long serialVersionUID = 1L;

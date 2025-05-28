@@ -7,9 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * DTO for {@link com.svc.ems.entity.RegistrationDetailEntity}
- */
+
 @Data
 public class RegistrationDetailDto implements Serializable {
 

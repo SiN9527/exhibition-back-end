@@ -7,9 +7,7 @@ import lombok.Value;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * DTO for {@link com.svc.ems.entity.MemberRoleEventEntity}
- */
+
 @Value
 public class MemberRoleEventDto implements Serializable {
     @JsonProperty("RoleCode")

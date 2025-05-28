@@ -1,7 +1,8 @@
 package com.exhibition.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.exhibition.utils.JwtUtil;
+import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,32 +17,43 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
+
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity // 開啟 @PreAuthorize 等權限註解功能（如果有用到）
 public class SecurityConfig {
 
+    // 注入自定義的 JwtUtil，用來處理 JWT 的相關邏輯
+    @Resource
+    private JwtUtil jwtUtil;
     private final JwtAuthenticationFilter jwtFilter;
+    @Resource
+    private CorsConfigurationSource source;
 
-    private final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
-
-    // Swagger + Open API 白名單路徑
     private static final String[] SWAGGER_WHITELIST = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
             "/swagger-resources/**",
-            "/webjars/**"
+            "/webjars/**",
+            "/member/api/sys/**",
+            "/admin/api/sys/**",
+            "/api/base/**",
+            "/endpoint/**"
+
+
+
+
     };
 
-    public SecurityConfig(JwtAuthenticationFilter jwtFilter) {
+    public SecurityConfig(JwtUtil jwtUtil, JwtAuthenticationFilter jwtFilter, CorsConfigurationSource source) {
+        this.jwtUtil = jwtUtil;
         this.jwtFilter = jwtFilter;
+        this.source = source;
     }
 
-    /**
-     * 單一 SecurityFilterChain：統一管理所有安全策略
-     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -49,7 +61,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 白名單完全放行
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
-                        .requestMatchers("/endpoint/user/register").permitAll() // 開放本地註冊
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // CORS 預檢請求放行
                         // 其他請求一律需要認證
                         .anyRequest().authenticated()
@@ -74,4 +85,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
+
+

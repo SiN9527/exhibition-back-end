@@ -1,13 +1,14 @@
 package com.exhibition.dto.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.Value;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 
-@Value
+@Data
 public class AdminMainEntityDto implements Serializable {
 
     @JsonProperty("AdminId")

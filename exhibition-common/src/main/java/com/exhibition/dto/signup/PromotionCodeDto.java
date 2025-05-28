@@ -8,9 +8,7 @@ import lombok.Value;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * DTO for {@link com.svc.ems.entity.PromotionCodeEntity}
- */
+
 @Value
 public class PromotionCodeDto implements Serializable {
     @Size(max = 20)

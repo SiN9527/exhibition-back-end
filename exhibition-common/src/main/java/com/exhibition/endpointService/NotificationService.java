@@ -1,7 +1,6 @@
 package com.exhibition.endpointService;
 
 import com.exhibition.dto.auth.MemberMainEntityDto;
-import com.exhibition.wrapper.MatchNotificationWrapper;
 
 public interface NotificationService {
 

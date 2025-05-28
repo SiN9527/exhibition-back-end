@@ -1,16 +1,13 @@
 package com.exhibition.dto.signup;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.svc.ems.entity.PromotionCodeEntity;
 import jakarta.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * DTO for {@link com.svc.ems.entity.RegistrationPromoEntity}
- */
-@Value
+@Data
 public class RegistrationPromoDto implements Serializable {
 
 
@@ -19,7 +16,7 @@ public class RegistrationPromoDto implements Serializable {
     RegistrationMainDto registrationMainEntityDto;
     @NotNull
     @JsonProperty("PromotionCodeDto")
-    PromotionCodeEntity promotionCodeDto;
+    PromotionCodeDto promotionCodeDto;
 
     @JsonProperty("AppliedDiscount")
     Integer appliedDiscount;

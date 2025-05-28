@@ -1,11 +1,10 @@
 package com.exhibition.endpointService;
 
-import com.exhibition.dto.UserDto;
+import com.exhibition.dto.auth.MemberMainEntityDto;
 
 public interface UserService {
 
-    UserDto getUser(String userId);
 
-    //註冊會員請求
-    RegiResp userRegister(RegiReq regiReq);
+
+     MemberMainEntityDto getMember(String userId);
 }

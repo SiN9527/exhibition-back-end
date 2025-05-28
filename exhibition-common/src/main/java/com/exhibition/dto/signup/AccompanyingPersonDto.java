@@ -8,9 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.Instant;
 
-/**
- * DTO for {@link com.svc.ems.entity.AccompanyingPersonEntity}
- */
+
 @Data
 public class AccompanyingPersonDto implements Serializable {
 

@@ -30,14 +30,10 @@ public class RestTemplateConfig {
     @Value("${micro.user.url}")
     private String userMicroServiceUrl;
 
-    @Value("${micro.core.url}")
-    private String coreMicroServiceUrl;
 
     @Value("${micro.notification.url}")
     private String notificationMicroServiceUrl;
 
-    @Value("${micro.auth.url}")
-    private String authMicroServiceUrl;
 
     /**
      * 自訂一個 Interceptor，自動從當前 request 抓 JWT 加進 Authorization Header
@@ -69,16 +65,7 @@ public class RestTemplateConfig {
         return build;
     }
 
-    @Bean(name = "coreRestTemplate")
-    public RestTemplate coreRestTemplate() {
-        return restTemplateBuilder
-                .rootUri(coreMicroServiceUrl)
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .connectTimeout(Duration.ofSeconds(3))
-                .readTimeout(Duration.ofSeconds(5))
-                .additionalInterceptors(List.of(authTokenInterceptor()))
-                .build();
-    }
+
 
     @Bean(name = "notificationRestTemplate")
     public RestTemplate notificationRestTemplate() {

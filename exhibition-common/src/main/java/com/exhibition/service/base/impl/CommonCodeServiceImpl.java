@@ -1,11 +1,11 @@
 package com.exhibition.service.base.impl;
 
 
-import com.svc.ems.dto.common.CommonCodeList;
-import com.svc.ems.entity.CommonCodeEntity;
-import com.svc.ems.repo.CommonCodeRepository;
-import com.svc.ems.svc.base.CommonCodeService;
-import com.svc.ems.utils.MapperUtils;
+import com.exhibition.dto.common.CommonCodeList;
+import com.exhibition.entity.CommonCodeEntity;
+import com.exhibition.repository.CommonCodeRepository;
+import com.exhibition.service.base.CommonCodeService;
+import com.exhibition.utils.MapperUtils;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

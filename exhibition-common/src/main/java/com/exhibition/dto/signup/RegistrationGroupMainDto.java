@@ -1,17 +1,15 @@
 package com.exhibition.dto.signup;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.svc.ems.entity.RegistrationGroupMainEntity;
 import jakarta.validation.constraints.Size;
-import lombok.Value;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * DTO for {@link RegistrationGroupMainEntity}
- */
-@Value
+
+@Data
 public class RegistrationGroupMainDto implements Serializable {
     @Size(max = 20)
     @JsonProperty("GroupId")

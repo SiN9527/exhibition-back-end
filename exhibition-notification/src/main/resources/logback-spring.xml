@@ -30,7 +30,7 @@
 
     <!-- log 等級 -->
     <logger name="org.springframework" level="INFO"/>
-    <logger name="com.hititoff" level="DEBUG"/>
+    <logger name="com.exhibition" level="DEBUG"/>
 
     <!-- root logger -->
     <root level="INFO">

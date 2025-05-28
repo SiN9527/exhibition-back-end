@@ -1,6 +1,7 @@
 package com.exhibition.exception;
 
-import com.hititoff.enumerate.ServiceExceptionReason;
+
+import com.exhibition.enumerate.ServiceExceptionReason;
 import lombok.Getter;
 
 @Getter
