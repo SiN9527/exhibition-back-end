@@ -1,6 +1,7 @@
 package com.exhibition.entity.member;
 
 import com.exhibition.dto.user.MemberUpdateRequest;
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "MEMBER_MAIN", schema = "ems_001")
-public class MemberMainEntity {
+public class MemberMainEntity extends Auditable {
 
     @Id
     @Size(max = 50)
@@ -97,15 +98,15 @@ public class MemberMainEntity {
     @Column(name = "created_by", length = 50)
     private String createdBy;
 
-    @Column(name = "created_at")
-    private Timestamp createdAt;
+    @Column(name = "create_time")
+    private Timestamp createTime;
 
     @Size(max = 50)
     @Column(name = "updated_by", length = 50)
     private String updatedBy;
 
-    @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    @Column(name = "update_time")
+    private Timestamp updateTime;
 
 
 

@@ -1,5 +1,6 @@
 package com.exhibition.entity;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,7 +11,7 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @Table(name = "AUTH_TOKEN", schema = "ems_001")
-public class AuthTokenEntity {
+public class AuthTokenEntity extends Auditable {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
@@ -31,16 +32,16 @@ public class AuthTokenEntity {
     private Timestamp expiredAt;
 
     @NotNull
-    @Column(name = "created_at")
-    private Timestamp createdAt;
+    @Column(name = "create_time")
+    private Timestamp createTime;
 
 
     /**
-     * 設定 `created_at` 和 `updated_at` 預設值
+     * 設定 `create_time` 和 `update_time` 預設值
      */
     @PrePersist
     protected void onCreate() {
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.createTime = new Timestamp(System.currentTimeMillis());
 
     }
 

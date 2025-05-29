@@ -1,5 +1,6 @@
 package com.exhibition.dto.signup;
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,7 +11,7 @@ import java.sql.Timestamp;
 
 
 @Value
-public class PromotionCodeDto implements Serializable {
+public class PromotionCodeDto  extends DtoAuditable implements Serializable {
     @Size(max = 20)
     @JsonProperty("Code")
     String code;
@@ -29,6 +30,6 @@ public class PromotionCodeDto implements Serializable {
     Integer usedCount;
     @JsonProperty("ValidUntil")
     Timestamp validUntil;
-    @JsonProperty("CreatedAt")
-    Timestamp createdAt;
+    @JsonProperty("CreateTime")
+    Timestamp createTime;
 }

@@ -97,7 +97,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         entity.setMemberId(id); // 產生隨機的 memberId
         entity.setPassword(passwordEncoder.encode(req.getPassword()));
         entity.setEnabled(false); // 預設帳號未啟用
-        entity.setCreatedAt(timeNow); // 設定建立時間
+        entity.setCreateTime(timeNow); // 設定建立時間
         entity.setRegistrationDate(timeNow); // 設定註冊時間
         memberMainRepository.save(entity);
 

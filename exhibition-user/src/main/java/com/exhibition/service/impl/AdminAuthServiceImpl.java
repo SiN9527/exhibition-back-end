@@ -168,10 +168,10 @@ public class AdminAuthServiceImpl implements AdminAuthService {
 
 
         MemberMainEntity entity = MapperUtils.map(req, MemberMainEntity.class);
-        entity.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        entity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         entity.setUpdatedBy(account);
         entity.setCreatedBy(member.getCreatedBy());
-        entity.setCreatedAt(member.getCreatedAt());
+        entity.setCreateTime(member.getCreateTime());
         entity.setEnabled(member.getEnabled());
         entity.setRegistrationDate(member.getRegistrationDate());
 

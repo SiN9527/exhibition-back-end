@@ -1,5 +1,6 @@
 package com.exhibition.dto.auth;
 
+import com.exhibition.dto.DtoAuditable;
 import com.exhibition.dto.user.MemberUpdateRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberMainEntityDto implements Serializable {
+public class MemberMainEntityDto  extends DtoAuditable implements Serializable {
 
     @JsonProperty("MemberId")
     String memberId;
@@ -58,10 +59,10 @@ public class MemberMainEntityDto implements Serializable {
     Boolean needResetPwd;
 
     String createdBy;
-    Timestamp createdAt;
+    Timestamp createTime;
 
     String updatedBy;
-    Timestamp updatedAt;
+    Timestamp updateTime;
 
 
 

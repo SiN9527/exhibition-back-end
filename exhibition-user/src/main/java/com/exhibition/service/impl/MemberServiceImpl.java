@@ -74,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 
         member.updateProfile(req);
 
-        member.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        member.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         member.setUpdatedBy(userDetails.getUsername());
         memberMainRepository.save(member);
 

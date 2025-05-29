@@ -1,6 +1,7 @@
 package com.exhibition.dto.signup;
 
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -10,7 +11,7 @@ import java.sql.Timestamp;
 
 
 @Data
-public class RegistrationGroupMainDto implements Serializable {
+public class RegistrationGroupMainDto  extends DtoAuditable implements Serializable {
     @Size(max = 20)
     @JsonProperty("GroupId")
     String groupId;
@@ -36,8 +37,8 @@ public class RegistrationGroupMainDto implements Serializable {
     Integer groupSize;
     @JsonProperty("PaymentStatus")
     String paymentStatus;
-    @JsonProperty("CreatedAt")
-    Timestamp createdAt;
-    @JsonProperty("    Timestamp UpdatedAt;\n")
-    Timestamp updatedAt;
+    @JsonProperty("CreateTime")
+    Timestamp createTime;
+    @JsonProperty("    Timestamp UpdateTime;\n")
+    Timestamp updateTime;
 }

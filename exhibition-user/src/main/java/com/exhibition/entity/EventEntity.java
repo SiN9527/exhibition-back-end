@@ -1,5 +1,6 @@
 package com.exhibition.entity;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,7 +19,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EventEntity {
+public class EventEntity extends Auditable {
 
     @Id
     @Column(name = "event_id", length = 36, nullable = false)
@@ -54,13 +55,13 @@ public class EventEntity {
     @Column(name = "submission_end_date")
     private Timestamp submissionEndDate; // 投稿截止時間
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "create_time", nullable = false, updatable = false)
     @Builder.Default
-    private Timestamp createdAt = Timestamp.from(Instant.now()); // 建立時間 (不可更新)
+    private Timestamp createTime = Timestamp.from(Instant.now()); // 建立時間 (不可更新)
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "update_time", nullable = false)
     @Builder.Default
-    private Timestamp updatedAt = Timestamp.from(Instant.now()); // 更新時間 (可更新)
+    private Timestamp updateTime = Timestamp.from(Instant.now()); // 更新時間 (可更新)
 
 
 

@@ -1,5 +1,6 @@
 package com.exhibition.entity.admin;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -9,7 +10,7 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @Table(name = "ADMIN_MAIN_ROLE", schema = "ems_001")
-public class AdminMainRoleEntity {
+public class AdminMainRoleEntity extends Auditable {
 
     @EmbeddedId
     private AdminMainRolePkEntity pk; // 複合主鍵
@@ -18,28 +19,28 @@ public class AdminMainRoleEntity {
     @Column(name = "created_by", length = 50)
     private String createdBy;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Timestamp createdAt;
+    @Column(name = "create_time", nullable = false, updatable = false)
+    private Timestamp createTime;
 
     @Size(max = 50)
     @Column(name = "updated_by", length = 50)
     private String updatedBy;
 
-    @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    @Column(name = "update_time")
+    private Timestamp updateTime;
 
     /**
-     * 設定 `created_at` 和 `updated_at` 預設值
+     * 設定 `create_time` 和 `update_time` 預設值
      */
     @PrePersist
     protected void onCreate() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        this.createdAt = now;
-        this.updatedAt = now;
+        this.createTime = now;
+        this.updateTime = now;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updatedAt = new Timestamp(System.currentTimeMillis());
+        this.updateTime = new Timestamp(System.currentTimeMillis());
     }
 }

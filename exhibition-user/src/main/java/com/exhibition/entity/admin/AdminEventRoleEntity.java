@@ -1,5 +1,6 @@
 package com.exhibition.entity.admin;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class AdminEventRoleEntity {
+public class AdminEventRoleEntity extends Auditable {
 
     @Id
     @Column(name = "admin_id", nullable = false)
@@ -35,11 +36,11 @@ public class AdminEventRoleEntity {
     @Column(name = "updated_by", nullable = false)
     private String updatedBy;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Timestamp createdAt;
+    @Column(name = "create_time", nullable = false, updatable = false)
+    private Timestamp createTime;
 
-    @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    @Column(name = "update_time")
+    private Timestamp updateTime;
 
 
 }

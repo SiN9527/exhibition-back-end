@@ -1,13 +1,14 @@
 package com.exhibition.dto.common;
 
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
-public class CommonCodeList implements Serializable {
+public class CommonCodeList  extends DtoAuditable  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("CodeType")

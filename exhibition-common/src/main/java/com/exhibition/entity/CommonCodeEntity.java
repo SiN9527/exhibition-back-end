@@ -1,17 +1,19 @@
 package com.exhibition.entity;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Data
 @Entity
 @IdClass(CommonCodePkEntity.class)
 @Table(name = "COMMON_CODE", schema = "ems_001")
-public class CommonCodeEntity {
+public class CommonCodeEntity extends Auditable {
 
     @Id
     @Size(max = 255)
@@ -50,14 +52,14 @@ public class CommonCodeEntity {
     @Column(name = "created_user")
     private String createdUser;
 
-    @Column(name = "created_time")
-    private Instant createdTime;
+    @Column(name = "create_time")
+    private Timestamp createTime;
 
     @Size(max = 255)
     @Column(name = "modified_user")
     private String modifiedUser;
 
     @Column(name = "modified_time")
-    private Instant modifiedTime;
+    private Timestamp modifiedTime;
 
 }

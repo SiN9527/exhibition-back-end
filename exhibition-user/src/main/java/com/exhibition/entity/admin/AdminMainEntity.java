@@ -1,5 +1,6 @@
 package com.exhibition.entity.admin;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,7 +18,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @Table(name = "ADMIN_MAIN", schema = "ems_001")
-public class AdminMainEntity {
+public class AdminMainEntity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 設定自動生成 ID
     @Column(name = "admin_id", nullable = false)
@@ -60,27 +61,27 @@ public class AdminMainEntity {
     private String createdBy;
 
 
-    @Column(name = "created_at")
-    private Timestamp createdAt;
+    @Column(name = "create_time")
+    private Timestamp createTime;
 
     @Size(max = 50)
     @Column(name = "updated_by", length = 50)
     private String updatedBy;
 
 
-    @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    @Column(name = "update_time")
+    private Timestamp updateTime;
 
 
     @PrePersist
     protected void onCreate() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        this.createdAt = now;
-        this.updatedAt = now;
+        this.createTime = now;
+        this.updateTime = now;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updatedAt = new Timestamp(System.currentTimeMillis());
+        this.updateTime = new Timestamp(System.currentTimeMillis());
     }
 }

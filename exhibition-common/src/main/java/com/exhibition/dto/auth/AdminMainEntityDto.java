@@ -1,5 +1,6 @@
 package com.exhibition.dto.auth;
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Value;
@@ -9,7 +10,7 @@ import java.sql.Timestamp;
 
 
 @Data
-public class AdminMainEntityDto implements Serializable {
+public class AdminMainEntityDto extends DtoAuditable implements Serializable {
 
     @JsonProperty("AdminId")
     Long adminId;
@@ -29,10 +30,10 @@ public class AdminMainEntityDto implements Serializable {
     Boolean enabled;
     @JsonProperty("CreatedBy")
     String createdBy;
-    @JsonProperty("CreatedAt")
-    Timestamp createdAt;
+    @JsonProperty("CreateTime")
+    Timestamp createTime;
     @JsonProperty("UpdatedBy")
     String updatedBy;
-    @JsonProperty("UpdatedAt")
-    Timestamp updatedAt;
+    @JsonProperty("UpdateTime")
+    Timestamp updateTime;
 }

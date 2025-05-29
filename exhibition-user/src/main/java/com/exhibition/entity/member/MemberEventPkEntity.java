@@ -1,5 +1,6 @@
 package com.exhibition.entity.member;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.Embeddable;
 import lombok.Data;
 

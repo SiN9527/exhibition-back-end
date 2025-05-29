@@ -1,11 +1,13 @@
 package com.exhibition.entity.member;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -18,7 +20,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "MEMBER_ROLE_EVENT", schema = "ems_001")
-public class MemberRoleEventEntity {
+public class MemberRoleEventEntity extends Auditable {
 
     @Id
     @Size(max = 10)
@@ -38,8 +40,8 @@ public class MemberRoleEventEntity {
     @Column(name = "event_id", nullable = false, length = 50)
     private String eventId;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
+    @Column(name = "create_time")
+    private Timestamp createTime;
 
     @Size(max = 50)
     @Column(name = "created_by", length = 50)

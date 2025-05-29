@@ -1,4 +1,4 @@
-package com.exhibition.endpointService;
+package com.exhibition.endpointController;
 
 
 import com.exhibition.dto.mail.SendMailRequest;

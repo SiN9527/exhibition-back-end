@@ -32,11 +32,11 @@ public class EmailTemplateDTO implements Serializable {
     @JsonProperty("UpdateBy")
     private String updateBy;
 
-    @JsonProperty("CreatedAt")
-    private Timestamp createdAt;
+    @JsonProperty("CreateTime")
+    private Timestamp createTime;
 
-    @JsonProperty("UpdatedAt")
-    private Timestamp updatedAt;
+    @JsonProperty("UpdateTime")
+    private Timestamp updateTime;
 
     @JsonProperty("EventStartDate")
     private Timestamp eventStartDate;

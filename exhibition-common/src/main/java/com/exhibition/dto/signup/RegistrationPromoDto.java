@@ -1,6 +1,7 @@
 package com.exhibition.dto.signup;
 
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RegistrationPromoDto implements Serializable {
+public class RegistrationPromoDto  extends DtoAuditable implements Serializable {
 
 
     @NotNull

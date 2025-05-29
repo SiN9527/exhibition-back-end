@@ -1,5 +1,6 @@
 package com.exhibition.entity.admin;
 
+import com.exhibition.entity.base.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,7 +17,7 @@ import java.sql.Timestamp;
 @IdClass(AdminEventPkEntity.class)
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminEventEntity {
+public class AdminEventEntity extends Auditable {
 
     @Size(max = 50)
     @NotNull
@@ -30,7 +31,7 @@ public class AdminEventEntity {
     @Id
     private String eventId;
 
-    @Column(name = "created_at")
-    private Timestamp createdAt;
+    @Column(name = "create_time")
+    private Timestamp createTime;
 
 }

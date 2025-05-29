@@ -131,8 +131,8 @@ public class MemberUpdateRequest {
 //     */
 //    @NotBlank(message = "Created at cannot be empty")
 //    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}", message = "Created at must be in YYYY-MM-DD HH:mm:ss format")
-//    @JsonProperty("CreatedAt")
-//    private String createdAt;
+//    @JsonProperty("CreateTime")
+//    private String createTime;
 //
 //    /**
 //     * 更新者
@@ -146,7 +146,7 @@ public class MemberUpdateRequest {
 //     */
 //    @NotBlank(message = "Updated at cannot be empty")
 //    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}", message = "Updated at must be in YYYY-MM-DD HH:mm:ss format")
-//    @JsonProperty("UpdatedAt")
-//    private String updatedAt;
+//    @JsonProperty("UpdateTime")
+//    private String updateTime;
 
 }

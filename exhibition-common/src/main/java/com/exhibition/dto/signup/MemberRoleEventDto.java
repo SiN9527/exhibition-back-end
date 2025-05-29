@@ -1,5 +1,6 @@
 package com.exhibition.dto.signup;
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Size;
 import lombok.Value;
@@ -9,7 +10,7 @@ import java.sql.Timestamp;
 
 
 @Value
-public class MemberRoleEventDto implements Serializable {
+public class MemberRoleEventDto  extends DtoAuditable implements Serializable {
     @JsonProperty("RoleCode")
     @Size(max = 10)
     String roleCode;
@@ -19,8 +20,8 @@ public class MemberRoleEventDto implements Serializable {
     @JsonProperty("EventId")
     @Size(max = 50)
     String eventId;
-    @JsonProperty("CreatedAt")
-    Timestamp createdAt;
+    @JsonProperty("CreateTime")
+    Timestamp createTime;
     @Size(max = 50)
     @JsonProperty("CreatedBy")
     String createdBy;

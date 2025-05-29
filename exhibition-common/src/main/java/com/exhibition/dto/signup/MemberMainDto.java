@@ -1,12 +1,13 @@
 package com.exhibition.dto.signup;
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-public class MemberMainDto {
+public class MemberMainDto  extends DtoAuditable {
 
     @JsonProperty("eventId")
     private String EventId;  // 活動ID

@@ -1,5 +1,6 @@
 package com.exhibition.dto.signup;
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -10,7 +11,7 @@ import java.time.Instant;
 
 
 @Data
-public class AccompanyingPersonDto implements Serializable {
+public class AccompanyingPersonDto  extends DtoAuditable implements Serializable {
 
     @JsonProperty("Seq")
     Integer seq;
@@ -34,6 +35,6 @@ public class AccompanyingPersonDto implements Serializable {
     @JsonProperty("UploadNo")
     String uploadNo;
 
-    @JsonProperty("CreateAt")
-    Timestamp createAt;
+    @JsonProperty("CreateTime")
+    Timestamp createTime;
 }

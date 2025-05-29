@@ -6,5 +6,5 @@ public interface UserService {
 
 
 
-     MemberMainEntityDto getMember(String userId);
+     MemberMainEntityDto getMember(String memberId);
 }

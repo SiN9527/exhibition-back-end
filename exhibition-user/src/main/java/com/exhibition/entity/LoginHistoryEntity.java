@@ -1,5 +1,6 @@
 package com.exhibition.entity;
 
+import com.exhibition.entity.base.Auditable;
 import com.exhibition.entity.member.MemberMainEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @Table(name = "LOGIN_HISTORY", schema = "ems_001")
-public class LoginHistoryEntity {
+public class LoginHistoryEntity extends Auditable {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;

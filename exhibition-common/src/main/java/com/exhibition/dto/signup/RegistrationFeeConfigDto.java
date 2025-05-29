@@ -1,5 +1,6 @@
 package com.exhibition.dto.signup;
 
+import com.exhibition.dto.DtoAuditable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,7 +12,7 @@ import java.sql.Timestamp;
 
 
 @Value
-public class RegistrationFeeConfigDto implements Serializable {
+public class RegistrationFeeConfigDto  extends DtoAuditable implements Serializable {
 
 
 
@@ -39,8 +40,8 @@ public class RegistrationFeeConfigDto implements Serializable {
     BigDecimal amountUsd;
     @JsonProperty("IsActive")
     Boolean isActive;
-    @JsonProperty("CreatedAt")
-    Timestamp createdAt;
-    @JsonProperty("UpdatedAt")
-    Timestamp updatedAt;
+    @JsonProperty("CreateTime")
+    Timestamp createTime;
+    @JsonProperty("UpdateTime")
+    Timestamp updateTime;
 }
