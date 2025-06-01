@@ -1,4 +1,4 @@
-package com.exhibition.util;
+package com.exhibition.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

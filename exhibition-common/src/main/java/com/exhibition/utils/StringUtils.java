@@ -1,4 +1,4 @@
-package com.exhibition.util;
+package com.exhibition.utils;
 
 public class StringUtils {
     public static boolean isBlank(String str) {

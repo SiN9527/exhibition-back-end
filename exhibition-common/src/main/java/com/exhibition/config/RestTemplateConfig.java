@@ -30,6 +30,12 @@ public class RestTemplateConfig {
     @Value("${micro.user.url}")
     private String userMicroServiceUrl;
 
+    @Value("${micro.common.url}")
+    private String commonMicroServiceUrl;
+
+    @Value("${micro.signup.url}")
+    private String signupMicroServiceUrl;
+
 
     @Value("${micro.notification.url}")
     private String notificationMicroServiceUrl;
