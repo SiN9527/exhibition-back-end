@@ -1,0 +1,9 @@
+micro:
+  user:
+    url: "http://127.0.0.1:8080"
+  signup:
+    url: "http://127.0.0.1:8081"
+  common:
+    url: "http://127.0.0.1:8084"
+  notification:
+    url: "http://127.0.0.1:8085"

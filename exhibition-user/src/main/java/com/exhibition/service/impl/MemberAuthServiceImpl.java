@@ -99,6 +99,7 @@ public class MemberAuthServiceImpl implements MemberAuthService {
         entity.setEnabled(false); // 預設帳號未啟用
         entity.setCreateTime(timeNow); // 設定建立時間
         entity.setRegistrationDate(timeNow); // 設定註冊時間
+        entity.setEventId("Event001");
         memberMainRepository.save(entity);
 
 

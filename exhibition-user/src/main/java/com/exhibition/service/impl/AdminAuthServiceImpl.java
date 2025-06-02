@@ -1,7 +1,7 @@
 package com.exhibition.service.impl;
 
-import com.exhibition.dto.ApiResponseTemplate;
 import com.exhibition.dto.auth.AdminRegisterRequest;
+import com.exhibition.dto.auth.MemberMainEntityDto;
 import com.exhibition.dto.user.AdminMemberDeleteRequest;
 import com.exhibition.dto.user.AdminMemberListRequest;
 import com.exhibition.dto.user.AdminMemberProfileResponse;
@@ -9,7 +9,7 @@ import com.exhibition.dto.user.AdminMemberUpdateRequest;
 import com.exhibition.entity.admin.AdminEventEntity;
 import com.exhibition.entity.admin.AdminMainEntity;
 import com.exhibition.entity.member.MemberMainEntity;
-import com.exhibition.enums.ErrorCode;
+import com.exhibition.exception.AuthorizationFailedException;
 import com.exhibition.exception.LogicalProhibitedException;
 import com.exhibition.repository.*;
 import com.exhibition.service.AdminAuthService;
@@ -18,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -49,13 +47,8 @@ public class AdminAuthServiceImpl implements AdminAuthService {
     private final MemberMainRoleRepository memberMainRoleRepository;
 
 
-    /**
-     * 註冊 API，建立新使用者後回傳統一格式的成功訊息。
-     *
-     * @param req 前端傳入的使用者註冊資料
-     * @return 統一格式的 ApiResponse 物件，payload 為成功訊息
-     */
 
+    @Override
     public String adminRegister(@RequestBody AdminRegisterRequest req) {
 
 
@@ -80,28 +73,29 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         return "Admin registered successfully.";
     }
 
+
     @Override
-    public ResponseEntity<ApiResponseTemplate<?>> adminLogin(AdminRegisterRequest req) {
+    public String adminLogin(AdminRegisterRequest req) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ApiResponseTemplate<?>> adminLogout() {
+    public String adminLogout() {
         return null;
     }
 
     @Override
-    public ResponseEntity<ApiResponseTemplate<?>> adminRefreshToken(String refreshToken) {
+    public String adminRefreshToken(String refreshToken) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ApiResponseTemplate<?>> adminUpdateProfile(AdminRegisterRequest req) {
+    public String adminUpdateProfile(AdminRegisterRequest req) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ApiResponseTemplate<List<AdminMemberProfileResponse>>> adminGetMemberList(AdminMemberListRequest req) {
+    public List<AdminMemberProfileResponse> adminGetMemberList(AdminMemberListRequest req) {
 
         String account = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("Admin get member list: {}", account);
@@ -109,8 +103,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         Optional<AdminEventEntity> adminEventOpt = adminEventRepository.findByAccountAndEventId(account, req.getEventId());
 
         if (adminEventOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(ApiResponseTemplate.fail(403, "You do not have access to this event."));
+           throw new AuthorizationFailedException("Access Denied: You do not have permission to access this event.");
         }
         // 查詢該活動下所有的會員 ID
         List<String> memberIds = memberEventRepository.findMemberIdsByEventId(req.getEventId());
@@ -119,32 +112,31 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         List<MemberMainEntity> members = memberMainRepository.findAllByMemberIdIn(memberIds);
 
         // 封裝成 DTO 回傳
-        List<AdminMemberProfileResponse> responseList = members.stream()
+
+        return members.stream()
                 .map(member -> MapperUtils.map(member, AdminMemberProfileResponse.class))
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(ApiResponseTemplate.success("Successfully retrieved member list.", responseList));
 
 
     }
 
     @Override
-    public ResponseEntity<ApiResponseTemplate<?>> adminGetMemberProfile(AdminRegisterRequest req) {
+    public MemberMainEntityDto adminGetMemberProfile(AdminRegisterRequest req) {
         return null;
     }
 
 
     @Override
-    public ResponseEntity<ApiResponseTemplate<?>> adminUpdatePwd(AdminRegisterRequest req) {
+    public String adminUpdatePwd(AdminRegisterRequest req) {
         return null;
     }
 
     /**
      * 編輯會員資訊
      */
-    @Override
     @Transactional
-    public ResponseEntity<ApiResponseTemplate<String>> adminUpdateMemberProfile(AdminMemberUpdateRequest req) {
+    @Override
+    public String adminUpdateMemberProfile(AdminMemberUpdateRequest req) {
 
         String account = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -152,13 +144,12 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         Optional<AdminEventEntity> adminEventOpt = adminEventRepository.findByAccountAndEventId(account, req.getEventId());
 
         if (adminEventOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(ApiResponseTemplate.fail(403, "You do not have access to this event."));
+            throw new AuthorizationFailedException("Access Denied: You do not have permission to access this event.");
         }
 
         MemberMainEntity member = memberMainRepository.findById(req.getMemberId()).orElse(null);
         if (member == null) {
-            return ResponseEntity.badRequest().body(ApiResponseTemplate.fail(404, ErrorCode.MEMBER_NOT_FOUND));
+           throw new LogicalProhibitedException("Member not found");
         }
 
 
@@ -177,16 +168,15 @@ public class AdminAuthServiceImpl implements AdminAuthService {
 
         memberMainRepository.save(entity);
 
-
-        return ResponseEntity.ok(ApiResponseTemplate.success("Profile updated successfully "));
+        return "Profile updated successfully ";
     }
 
     /**
      * 刪除會員
      */
-    @Override
     @Transactional
-    public ResponseEntity<ApiResponseTemplate<String>> adminDeleteMemberProfile(AdminMemberDeleteRequest req) {
+    @Override
+    public String adminDeleteMemberProfile(AdminMemberDeleteRequest req) {
 
         String memberId = req.getMemberId();
         String eventId = req.getEventId();
@@ -196,13 +186,12 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         Optional<AdminEventEntity> adminEventOpt = adminEventRepository.findByAccountAndEventId(account, req.getEventId());
 
         if (adminEventOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(ApiResponseTemplate.fail(403, "You do not have access to this event."));
+            throw new AuthorizationFailedException("Access Denied: You do not have permission to access this event.");
         }
 
-        MemberMainEntity member = memberMainRepository.findById(memberId).orElse(null);
+        MemberMainEntity member = memberMainRepository.findById(req.getMemberId()).orElse(null);
         if (member == null) {
-            return ResponseEntity.badRequest().body(ApiResponseTemplate.fail(404, ErrorCode.MEMBER_NOT_FOUND));
+            throw new LogicalProhibitedException("Member not found");
         }
 
         // 刪除關聯表再刪主資料
@@ -210,7 +199,7 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         memberMainRoleRepository.deleteByPk_MemberId(memberId);
         memberMainRepository.deleteById(memberId);
 
-        return ResponseEntity.ok(ApiResponseTemplate.success("會員資料刪除成功"));
+        return "Member Delete Success !";
     }
 
 

@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface AdminMainMapper {
 
-    AdminMainMapper instance = Mappers.getMapper(AdminMainMapper.class);
+//    AdminMainMapper instance = Mappers.getMapper(AdminMainMapper.class);
 
     AdminMainEntityDto AdminMainEntityToAdminMainEntityDto(AdminMainEntity entity);
 

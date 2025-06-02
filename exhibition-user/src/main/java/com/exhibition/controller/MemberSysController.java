@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/member/api")
+@RequestMapping("/api/member")
 public class MemberSysController {
 
 
@@ -58,7 +58,7 @@ public class MemberSysController {
      * 使用者註冊
      */
     @Operation(summary = "使用者註冊")
-    @PostMapping("//sys/register")
+    @PostMapping("/sys/register")
     public ProcessPayload<String> register(@RequestBody MemberRegisterRequest request,
                                            HttpServletResponse response) {
         return AuthUsecaseExcHandler.runFor(() -> memberAuthService.memberRegister(request))
