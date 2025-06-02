@@ -17,7 +17,7 @@
 
 ---
 
-## 🚀 專案啟動方式
+##  專案啟動方式
 
 請先確保安裝好以下工具：
 
@@ -26,7 +26,7 @@
 - MySQL 8+
 - Git
 
-### ✅ 1. Clone 專案
+###  Clone 專案
 
 ```bash
 git clone https://github.com/SiN9527/exhibition-back-end.git
