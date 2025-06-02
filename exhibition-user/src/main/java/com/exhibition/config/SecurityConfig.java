@@ -38,8 +38,8 @@ public class SecurityConfig {
             "/swagger-ui.html",
             "/swagger-resources/**",
             "/webjars/**",
-            "/member/api/sys/**",
-            "/admin/api/sys/**",
+            "/api/member/sys/**",
+            "/api/admin/sys/**",
             "/api/base/**",
             "/endpoint/**"
 
